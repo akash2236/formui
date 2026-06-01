@@ -65,24 +65,26 @@ A premium glassmorphic single-panel communication portal designed for secure dat
 
 ```mermaid
 graph TD
-    A[User Opens Contact Form] --> B[Submit Button Disabled by Default]
-    B --> C[User Types in Fields]
+    A["User Opens Contact Form"] --> B["Submit Button Disabled by Default"]
+    B --> C["User Types in Fields"]
     
-    C --> D{Field: Phone?}
-    D -- Yes --> E[Keystroke Interceptor formats to +91-XXXXX-XXXXX] --> F[Update React State]
-    D -- No --> F
+    C --> D{"Field: Phone?"}
+    D -- "Yes" --> E["Keystroke Interceptor formats to +91-XXXXX-XXXXX"]
+    E --> F["Update React State"]
+    D -- "No" --> F
     
-    F --> G[useEffect runs validation suite]
-    G --> H{All Fields Valid & Terms Accepted?}
-    H -- No --> I[Show visual Error Alerts & Disable Submit]
-    H -- Yes --> J[Enable Submit Button]
+    F --> G["useEffect runs validation suite"]
+    G --> H{"All Fields Valid & Terms Accepted?"}
+    H -- "No" --> I["Show visual Error Alerts & Disable Submit"]
+    H -- "Yes" --> J["Enable Submit Button"]
     
-    J --> K[User clicks Send Message]
-    K --> L[Dispatch JSON payload to Developer Console]
-    L --> M[Pop Success Modal with submitted parameters]
-    M --> N[User clicks Continue]
-    N --> O[Form fully resets to initial state]
+    J --> K["User clicks Send Message"]
+    K --> L["Dispatch JSON payload to Developer Console"]
+    L --> M["Pop Success Modal with submitted parameters"]
+    M --> N["User clicks Continue"]
+    N --> O["Form fully resets to initial state"]
 ```
+
 
 ### File Explanations & Key Roles
 
@@ -122,36 +124,40 @@ A multi-step checkout form designed with a split e-commerce interface, sticky or
 
 ```mermaid
 graph TD
-    A[User Opens Checkout Form] --> B[Step 1: Fill Shipping Address]
-    B --> C{Address fields valid?}
-    C -- No --> B
-    C -- Yes --> D[Show Valid Glow & Enable Step 2]
+    A["User Opens Checkout Form"] --> B["Step 1: Fill Shipping Address"]
+    B --> C{"Address fields valid?"}
+    C -- "No" --> B
+    C -- "Yes" --> D["Show Valid Glow & Enable Step 2"]
     
-    D --> E{Checkbox: Billing same as Shipping?}
-    E -- Yes --> F[Skip Step 2: Billing & Proceed to Payment]
-    E -- No --> G[Show Step 2: Fill Billing Address]
+    D --> E{"Checkbox: Billing same as Shipping?"}
+    E -- "Yes" --> F["Skip Step 2: Billing & Proceed to Payment"]
+    E -- "No" --> G["Show Step 2: Fill Billing Address"]
     
-    G --> H{Billing fields valid?}
-    H -- No --> G
-    H -- Yes --> F
+    G --> H{"Billing fields valid?"}
+    H -- "No" --> G
+    H -- "Yes" --> F
     
-    F --> I[Select Payment Method]
-    I --> J{Method selected?}
+    F --> I["Select Payment Method"]
+    I --> J{"Method selected?"}
     
-    J -- Credit/Debit Card --> K[Fill Number with auto-spaces + Expiry MM/YY + CVV mask]
-    J -- Digital Wallet --> L[Select wallet provider dropdown]
-    J -- UPI ID Address --> M[Fill UPI Address and validate with user@bank regex]
+    J -- "Credit/Debit Card" --> K["Fill Number with auto-spaces + Expiry MM/YY + CVV mask"]
+    J -- "Digital Wallet" --> L["Select wallet provider dropdown"]
+    J -- "UPI ID Address" --> M["Fill UPI Address and validate with user@bank regex"]
     
-    K & L & M --> N{All Active Stepper Steps Valid?}
-    N -- No --> O[Disable Place Order CTA]
-    N -- Yes --> P[Enable Place Order CTA]
+    K --> N{"All Active Stepper Steps Valid?"}
+    L --> N
+    M --> N
     
-    P --> Q[User clicks Place Secure Order]
-    Q --> R[Format transaction JSON payload & log to Console]
-    R --> S[Display Confirmation Modal with Order ID invoice]
-    S --> T[User clicks Continue Shopping]
-    T --> U[Reset all forms & checkout totals]
+    N -- "No" --> O["Disable Place Order CTA"]
+    N -- "Yes" --> P["Enable Place Order CTA"]
+    
+    P --> Q["User clicks Place Secure Order"]
+    Q --> R["Format transaction JSON payload & log to Console"]
+    R --> S["Display Confirmation Modal with Order ID invoice"]
+    S --> T["User clicks Continue Shopping"]
+    T --> U["Reset all forms & checkout totals"]
 ```
+
 
 ### File Explanations & Reusability Specs
 
